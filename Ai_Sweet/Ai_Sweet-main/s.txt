@@ -1,0 +1,70 @@
+
+import pandas as pd
+import re
+import numpy as np
+import exFeatures
+
+# *******
+print("************* Automation Sweet spam *************")
+
+
+def compareFwingFowes(fwing, fowers):
+    ff = []
+    for index in range(len(fwing)):
+        if fwing[index] > fowers[index]:
+            ff.append(1)
+        else:
+            ff.append(0)
+
+    print(ff)
+
+
+def CharactersofConten():
+    CharaToSpam = []
+    regularExpersion = r'//t.co/'
+    for i in range(len(dataset['Tweet'])):
+        temp = re.findall(regularExpersion, dataset['Tweet'].values[i])
+        if len(temp) > 0 :
+            CharaToSpam.append(1)
+        else:
+            CharaToSpam.append(0)
+
+    print(CharaToSpam)
+
+# read data set
+dataset = pd.read_csv('train.csv')
+print(dataset)
+#print(dataset.columns)
+
+
+features = []
+
+#print(dataset.values)
+#for row in range(len(dataset)):
+
+
+#replace null values
+dataset['following'].fillna(value=0,inplace=True)
+dataset['followers'].fillna(value=0,inplace=True)
+dataset['actions'].fillna(value=0,inplace=True)
+dataset['location'].fillna(value='un Known',inplace=True)
+
+following = dataset['following']
+followers = dataset['followers']
+#compareFwingFowes(following,followers)
+
+CharactersofConten()
+'''
+#?: to make group
+regex = r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+'
+regex2 = r'[a-zA-Z]\.[a-zA-Z]+.\.com\/(?:[\da-zA-Z]{2})+'
+for i in range(len(dataset['Tweet'])):
+
+    url1 = re.findall(regex, dataset['Tweet'].values[i])
+    url2 = re.findall(regex2, dataset['Tweet'].values[i])
+    #print(url1)
+    #print(url2)
+    print(len(url1)+len(url2))
+    #print("**********")
+'''
+
